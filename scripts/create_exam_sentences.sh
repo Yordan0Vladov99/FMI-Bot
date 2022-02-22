@@ -43,34 +43,47 @@ while read line;do
 	done< <(echo -e "$formated_str")
 
 	sentence=$(echo "$sentence" | sed 's/,$/\./g')
-	questions="На коя дата ще се провежда изпитът по $course на $specialty?
- В коя зала ще се провежда изпитът по $course на $specialty?
- От колко часът ще се провежда изпитът по $course на $specialty?
-Къде от ще се провежда изпитът по $course  на $specialty?
-Кога ще се провежда изпитът по $course на $specialty?
-В коя зала ще се провежда изпитът по $course на $specialty?
-От кога изпитът по $course на $specialty?
-Къде е изпитът по $course на $specialty?"
+#	questions="На коя дата ще се провежда изпитът по $course на $specialty?
+#В коя зала ще се провежда изпитът по $course на $specialty?
+#От колко часът ще се провежда изпитът по $course на $specialty?
+#Къде от ще се провежда изпитът по $course  на $specialty?
+#Кога ще се провежда изпитът по $course на $specialty?
+#В коя зала ще се провежда изпитът по $course на $specialty?
+#От кога изпитът по $course на $specialty?
+#Къде е изпитът по $course на $specialty?"
+
+questions="На коя дата ще се провежда изпитът по $course
+В коя зала ще се провежда изпитът по $course
+От колко часът ще се провежда изпитът по $course
+Къде от ще се провежда изпитът по $course
+Кога ще се провежда изпитът по $course
+В коя зала ще се провежда изпитът по $course
+От кога изпитът по $course
+Къде е изпитът по $course"
+
 
 	while read question;do
-		echo -e "$question\n$sentence\n" >> "$sentences"
+		echo -e "$questionна $specialty?\n$sentence\n" >> "$sentences"
+		echo -e "$question?\nКоя специялност сте?$specialty\n$sentence\n"
 	done< <(echo -e "$questions")
 
 	sentence="Курсът $course на $specialty се преподава от $teachers."
-	questions="Кой преподава по $course на $specialty?
-	Кой е учителският състав по $course на $specialty?"
+	questions="Кой преподава по $course
+	Кой е учителският състав по $course"
 	
 	while read question;do
-		echo -e "$question\n$sentence\n" >> "$sentences"
+		echo -e "$question на $specialty\n$sentence\n" >> "$sentences"
+		echo -e "$question?\nКоя специалност сте?\n$specialty\n$sentence\n" >> "$sentences"
 	done< <(echo -e "$questions")
 	
 	sentence="Курсът $course на $specialty попада в $category."
 
-	questions="Какъв е $course на $specialty?
-	Към каква категория приспада $course на $specialty?"
+	questions="Какъв е $course
+	Към каква категория приспада $course"
 	
 	while read question;do
-		echo -e "$question\n$sentence\n" >> "$sentences"
+		echo -e "$question на $specialty?\n$sentence\n" >> "$sentences"
+		echo -e "$question?\nКоя специалност сте?\n$specialty\n$sentence\n" >> "$sentences"
 	done< <(echo -e "$questions")
 
 	sentence="Изпитът по $course на $specialty ще се проведе $format."
@@ -83,6 +96,15 @@ while read line;do
 	while read question;do
 		echo -e "$question\n$sentence\n" >> "$sentences"
 	done< <(echo -e "$questions")
-			
+	
+	questions="Изпитът по $course присъствен ли ще е?
+	Изпитът по $course електронен ли ще е?
+	Изпитът по $course присътвен ли е?
+	Изпитът по $course електронене ли е?
+	Как ще се проведе изпитът по $course?"
+	
+	while read question;do
+		echo -e "$question\nКоя специалност сте?\n$specialty\n$sentence\n" >> "$sentences"
+	done< <(echo -e "$questions")
 
 done< <(cat $1 | grep -v '^[[:space:]]*$')
