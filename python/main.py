@@ -1,22 +1,24 @@
+from flask import Flask, render_template, request
 from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
-
-bot = ChatBot('FMI',  
-    logic_adapters=[
+from chatterbot.trainers import ChatterBotCorpusTrainer
+ 
+app = Flask(__name__)
+bot = ChatBot('FMI', logic_adapters=[
         'chatterbot.logic.BestMatch',
-        'chatterbot.logic.TimeLogicAdapter'],)
+        'chatterbot.logic.TimeLogicAdapter'], storage_adapter="chatterbot.storage.SQLStorageAdapter")
 
-name=input("Enter Your Name: ")
-print("Welcome to the Bot Service! Let me know how can I help you?")
-
-
-while True:
-    request=input(name+':')
-    if request=='Bye' or request =='bye':
-        print('Bot: Bye')
-        break
-    else:
-        response=bot.get_response(request)
-        print('Bot:',response)
+ 
+@app.route("/")
+def home():
+    return render_template("index.html")
+ 
+@app.route("/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    return str(english_bot.get_response(userText))
+ 
+ 
+if __name__ == "__main__":
+    app.run()
 
 
