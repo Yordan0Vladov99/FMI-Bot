@@ -12,7 +12,7 @@ if [[ ! -f $1 ]] && [[ ! -r $1 ]];then
 fi
 
 
-sentences="../text_files/sentences.txt"
+sentences="../text_files/exam_sentences.txt"
 
 while read line;do
 	dates=$(echo "$line" | cut -d';' -f6 | sed 's/%/\n/g')
@@ -63,7 +63,7 @@ questions="На коя дата ще се провежда изпитът по $
 
 
 	while read question;do
-		echo -e "$questionна $specialty?\n$sentence\n" >> "$sentences"
+		echo -e "$question на $specialty?\n$sentence\n" >> "$sentences"
 		echo -e "$question?\nКоя специялност сте?$specialty\n$sentence\n"
 	done< <(echo -e "$questions")
 

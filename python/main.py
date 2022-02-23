@@ -4,8 +4,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
  
 app = Flask(__name__)
 bot = ChatBot('FMI', logic_adapters=[
-        'chatterbot.logic.BestMatch',
-        'chatterbot.logic.TimeLogicAdapter'], storage_adapter="chatterbot.storage.SQLStorageAdapter")
+        'chatterbot.logic.BestMatch'], storage_adapter="chatterbot.storage.SQLStorageAdapter")
 
  
 @app.route("/")

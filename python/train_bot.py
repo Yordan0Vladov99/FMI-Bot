@@ -10,7 +10,7 @@ bot = ChatBot('FMI',
 trainer = ListTrainer(bot)
 sentences=[]
 
-session_sentences = open('../text_files/sentences.txt', 'r')
+session_sentences = open('../text_files/exam_sentences.txt', 'r')
 Lines = session_sentences.readlines()
 
 for line in Lines:

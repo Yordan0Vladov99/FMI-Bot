@@ -12,6 +12,7 @@ if [[ ! -f $1 ]] && [[ ! -r $1 ]];then
 fi
 
 sentences="../text_files/schedule_sentences.txt"
+specialty=$(cat "$1" | head -n 1 | cut -d';' -f4)
 
 day=""
 day_exercises=""
@@ -66,7 +67,6 @@ while read line;do
 done< <(cat "$1")
 
 courses=$(cat "$1" | cut -d';' -f3 | cut -d',' -f1 | sort | uniq)
-specialty=$(cat "$1" | head -n 1 | cut -d';' -f4)
 while read course;do
 	course_exercises=$(cat "$1" | grep ";$course,")
 	
